@@ -115,7 +115,8 @@ class DDPG_GILD(object):
         self.meta_optimizer.zero_grad()
         grad_omega = autograd.grad(loss_meta, self.gild_network.parameters())
         for gradient, variable in zip(grad_omega, self.gild_network.parameters()):
-            variable.grad.data = gradient
+            if variable.grad is not None:
+                 variable.grad.data = gradient
         self.meta_optimizer.step()
         self.actor_optimizer.step()
         self.hotplug.restore()
