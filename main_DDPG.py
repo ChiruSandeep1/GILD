@@ -162,7 +162,7 @@ if __name__ == "__main__":
     episode_num = 0
     max_episode_steps = eval_env._max_episode_steps
 
-    for t in range(int(args.max_timesteps/2)):
+    for t in range(int(args.max_timesteps/20)):
         episode_timesteps += 1
 
         # Select action randomly or according to policy
