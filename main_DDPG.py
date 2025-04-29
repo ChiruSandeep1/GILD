@@ -202,6 +202,13 @@ if __name__ == "__main__":
             avg_reward = evaluate_policy(policy, eval_env, eval_idx, t)
             eval_idx += 1
             evaluation_rewards.append(avg_reward)
+            
+            #
+            steps.append(t)
+            rewards.append(avg_reward)
+            
+            #
+            
             np.save('%s/evaluation/evaluation_reward.npy' % (save_path), evaluation_rewards)
             utils.write_log("------------------------------------------------------------------------------","", flags_log)
             utils.write_log("", "After episode %d, Total step %d, Average evaluation reward over 10 episodes: %f" % (
