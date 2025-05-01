@@ -143,6 +143,9 @@ class SAC_GILD(object):
             min_qf_pi_val_gild = torch.min(qf1_pi_val_gild, qf2_pi_val_gild)
             policy_loss_val_gild = ((self.alpha * log_pi_val_gild) - min_qf_pi_val_gild).mean()
                 # meta loss
+            action_val_bc = actor_tmp(state_val)
+            policy_bc_loss_val = -self.critic(state_val, action_val_bc).mean().detach()
+
             utility = torch.tanh(policy_bc_loss_val - policy_loss_val_gild)
             loss_meta = -utility
 

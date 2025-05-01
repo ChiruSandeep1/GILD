@@ -129,6 +129,8 @@ class TD3_GILD(object):
                 action_val_gild = self.actor(state_val)
                 policy_loss_val_gild = -self.critic.Q1(state_val, action_val_gild).mean() # -Q_gild
                     # meta loss
+                policy_bc_loss_val = -self.critic(state_val, action_val_bc).mean().detach()
+
                 utility = torch.tanh(policy_bc_loss_val - policy_loss_val_gild) # tanh(Q_gild-Q_bc)
                 loss_meta = -utility # maximize utility
 
